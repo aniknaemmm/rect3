@@ -8,7 +8,14 @@ script:
   - docker run -e CI=true ol/rect-test npm test -- --coverage
     
 after_success: 
-  - docker build -t ol/multi-client ./client
-  - docker build -t ol/multi-nginx ./nginx
-  - docker build -t ol/multi-server ./server
-  - docker build -t ol/multi-worker ./worker
+  - docker build -t aniknaemmmm/multi-client ./client
+  - docker build -t aniknaemmmm/multi-nginx ./nginx
+  - docker build -t aniknaemmmm/multi-server ./server
+  - docker build -t aniknaemmmm/multi-worker ./worker
+  
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    
+  - docker push aniknaemmmm/multi-client
+  - docker push aniknaemmmm/multi-nginx
+  - docker push aniknaemmmm/multi-server
+  - docker push aniknaemmmm/multi-worker
